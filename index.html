@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuro360 – Descubre tu carrera ideal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0e17;--paper:#fffcf5;--cream:#f5f0e8;--sand:#e8dfc8;
+  --teal:#00897b;--teal2:#26a69a;--amber:#f59e0b;--coral:#ef5350;
+  --mint:#e0f2f1;--warm:#fff8e1;
+  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+  --r:16px;--r2:24px;--shadow:0 4px 24px rgba(15,14,23,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink);overflow-x:hidden;}
+
+/* ── SCREENS ── */
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,252,245,.92);backdrop-filter:blur(16px);
+  border-bottom:2px solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:64px;
+}
+.nl{font-family:var(--font-head);font-size:1.5rem;font-weight:800;cursor:pointer;letter-spacing:-1px;}
+.nl span{color:var(--teal);}
+.nr{display:flex;gap:8px;align-items:center;}
+.nr button{
+  font-family:var(--font-body);font-size:.85rem;font-weight:500;
+  background:none;border:2px solid transparent;color:var(--ink);
+  padding:6px 16px;border-radius:100px;cursor:pointer;transition:all .2s;
+}
+.nr button:hover{border-color:var(--ink);}
+.nr .nb{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.nr .nb:hover{background:var(--teal);border-color:var(--teal);}
+
+/* ── HERO ── */
+.hero{
+  min-height:calc(100vh - 64px);
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:2px solid var(--ink);
+}
+.hero-left{
+  padding:80px 60px;display:flex;flex-direction:column;justify-content:center;
+  border-right:2px solid var(--ink);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--amber);color:var(--ink);
+  font-family:var(--font-head);font-size:.75rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 14px;border-radius:4px;margin-bottom:32px;width:fit-content;
+}
+.hero h1{
+  font-family:var(--font-head);font-size:clamp(3rem,6vw,5rem);
+  font-weight:800;line-height:1;letter-spacing:-2px;margin-bottom:24px;
+}
+.hero h1 em{font-style:italic;color:var(--teal);font-weight:400;}
+.hero-sub{font-size:1.05rem;color:#555;line-height:1.7;max-width:440px;margin-bottom:40px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-ink{
+  font-family:var(--font-head);font-weight:700;font-size:.95rem;
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  padding:14px 28px;border-radius:var(--r);cursor:pointer;transition:all .2s;
+}
+.btn-ink:hover{background:var(--teal);border-color:var(--teal);}
+.btn-out{
+  font-family:var(--font-head);font-weight:700;font-size:.95rem;
+  background:transparent;color:var(--ink);border:2px solid var(--ink);
+  padding:14px 28px;border-radius:var(--r);cursor:pointer;transition:all .2s;
+}
+.btn-out:hover{background:var(--cream);}
+.hero-right{
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;padding:60px 40px;position:relative;overflow:hidden;
+}
+.hero-right::before{
+  content:'360';
+  position:absolute;font-family:var(--font-head);font-size:28rem;font-weight:800;
+  color:rgba(255,255,255,.03);letter-spacing:-10px;
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+}
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;}
+.stat-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r2);padding:28px 24px;
+}
+.stat-card .num{
+  font-family:var(--font-head);font-size:2.8rem;font-weight:800;color:var(--paper);
+  line-height:1;margin-bottom:6px;
+}
+.stat-card .lbl{font-size:.8rem;color:rgba(255,255,255,.5);font-weight:300;}
+.stat-card.accent{background:var(--teal);border-color:var(--teal);}
+.stat-card.accent .num,.stat-card.accent .lbl{color:var(--paper)!important;}
+
+/* ── SECTIONS ── */
+.sec{padding:80px 40px;max-width:1140px;margin:0 auto;}
+.sec-line{display:flex;align-items:baseline;gap:16px;margin-bottom:48px;}
+.sec-num{font-family:var(--font-head);font-size:.8rem;font-weight:700;color:var(--teal);letter-spacing:.1em;}
+.sec-title{font-family:var(--font-head);font-size:2.2rem;font-weight:800;letter-spacing:-1px;}
+.divider{height:2px;background:var(--ink);margin:0;}
+
+/* ── AREA GRID ── */
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink);border-radius:var(--r2);overflow:hidden;}
+.area-cell{
+  padding:32px 24px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  cursor:pointer;transition:background .2s;position:relative;
+}
+.area-cell:nth-child(4n){border-right:none;}
+.area-cell:nth-last-child(-n+4){border-bottom:none;}
+.area-cell:hover{background:var(--mint);}
+.area-cell .ic{font-size:2rem;margin-bottom:12px;}
+.area-cell h4{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:6px;}
+.area-cell p{font-size:.78rem;color:#666;line-height:1.5;}
+
+/* ── TEST ── */
+.test-wrap{max-width:700px;margin:0 auto;padding:48px 24px;}
+.prog-track{height:6px;background:var(--sand);border-radius:100px;margin-bottom:6px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--teal);border-radius:100px;transition:width .4s ease;}
+.prog-meta{display:flex;justify-content:space-between;font-size:.78rem;color:#888;margin-bottom:40px;}
+.q-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--cream);border:1.5px solid var(--sand);
+  color:#444;font-size:.75rem;font-weight:600;
+  padding:5px 12px;border-radius:100px;margin-bottom:18px;
+}
+.q-text{font-family:var(--font-head);font-size:1.7rem;font-weight:700;line-height:1.25;margin-bottom:36px;letter-spacing:-.5px;}
+.scale-row{display:flex;gap:10px;margin-bottom:48px;flex-wrap:wrap;}
+.sc-btn{
+  flex:1;min-width:80px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:var(--paper);border:2px solid var(--sand);
+  border-radius:var(--r);padding:18px 12px;cursor:pointer;transition:all .18s;
+  font-family:var(--font-body);
+}
+.sc-btn:hover{border-color:var(--teal);background:var(--mint);}
+.sc-btn.on{border-color:var(--teal);background:var(--mint);}
+.sc-btn .emo{font-size:1.6rem;}
+.sc-btn .sc-lbl{font-size:.68rem;color:#888;text-align:center;line-height:1.3;}
+.sc-btn .sc-pt{font-size:.9rem;font-weight:700;color:var(--teal);}
+.mc-list{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;}
+.mc-btn{
+  background:var(--paper);border:2px solid var(--sand);
+  border-radius:var(--r);padding:16px 20px;cursor:pointer;
+  text-align:left;font-family:var(--font-body);color:var(--ink);
+  font-size:.95rem;transition:all .18s;display:flex;align-items:center;gap:14px;
+}
+.mc-btn:hover{border-color:var(--teal);background:var(--mint);}
+.mc-btn.on{border-color:var(--teal);background:var(--mint);}
+.mc-ltr{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  background:var(--cream);border:1.5px solid var(--sand);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:700;color:#666;
+}
+.mc-btn.on .mc-ltr{background:var(--teal);color:#fff;border-color:var(--teal);}
+.btn-next{
+  font-family:var(--font-head);font-weight:700;font-size:.95rem;
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  padding:14px 32px;border-radius:var(--r);cursor:pointer;transition:all .2s;
+  opacity:.3;pointer-events:none;float:right;
+}
+.btn-next.on{opacity:1;pointer-events:auto;}
+.btn-next.on:hover{background:var(--teal);border-color:var(--teal);}
+
+/* ── RESULTS ── */
+.res-wrap{max-width:800px;margin:0 auto;padding:48px 24px;}
+.res-hero{
+  background:var(--ink);color:var(--paper);
+  border-radius:var(--r2);padding:48px 40px;margin-bottom:32px;
+  display:flex;align-items:center;gap:32px;
+}
+.res-trophy{font-size:4rem;}
+.res-hero h2{font-family:var(--font-head);font-size:2rem;font-weight:800;margin-bottom:8px;}
+.res-hero p{color:rgba(255,255,255,.6);font-size:.95rem;}
+.res-bars-card{background:var(--cream);border:2px solid var(--sand);border-radius:var(--r2);padding:32px;margin-bottom:24px;}
+.res-bars-card h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:24px;}
+.r-row{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.r-name{min-width:150px;font-size:.88rem;font-weight:500;}
+.r-track{flex:1;height:12px;background:var(--sand);border-radius:100px;overflow:hidden;}
+.r-fill{height:100%;border-radius:100px;transition:width 1.2s cubic-bezier(.25,.46,.45,.94);width:0;}
+.r-pct{min-width:40px;text-align:right;font-weight:700;font-size:.88rem;color:var(--teal);}
+.rec-card{background:var(--mint);border:2px solid var(--teal);border-radius:var(--r2);padding:32px;margin-bottom:24px;}
+.rec-card h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:16px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  background:#fff;border:1.5px solid var(--teal);
+  color:var(--teal);padding:7px 16px;border-radius:100px;
+  font-size:.82rem;font-weight:600;
+}
+.profile-box{background:var(--warm);border:2px solid var(--amber);border-radius:var(--r2);padding:32px;margin-bottom:32px;}
+.profile-box h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:12px;}
+.profile-box p{font-size:.95rem;line-height:1.7;color:#444;}
+.res-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* ── CAREERS ── */
+.careers-wrap{max-width:1140px;margin:0 auto;padding:48px 40px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.f-btn{
+  font-family:var(--font-body);font-size:.82rem;font-weight:500;
+  background:var(--paper);border:2px solid var(--sand);color:#555;
+  padding:7px 18px;border-radius:100px;cursor:pointer;transition:all .2s;
+}
+.f-btn:hover,.f-btn.on{background:var(--ink);border-color:var(--ink);color:var(--paper);}
+.careers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
+.c-card{
+  background:var(--paper);border:2px solid var(--sand);
+  border-radius:var(--r2);overflow:hidden;transition:all .2s;cursor:pointer;
+}
+.c-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:var(--shadow);}
+.c-head{padding:24px 24px 0;}
+.c-tag{
+  display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:12px;
+}
+.c-name{font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:6px;}
+.c-type{font-size:.78rem;color:#888;}
+.c-body{padding:16px 24px 24px;}
+.c-desc{font-size:.84rem;color:#555;line-height:1.65;margin-bottom:16px;}
+.c-meta-row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.c-salary{font-size:.85rem;font-weight:600;color:var(--teal);}
+.c-demand{font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:100px;}
+.dem-h{background:#e0f2f1;color:#00695c;}
+.dem-m{background:#fff8e1;color:#e65100;}
+
+/* ── BUSCADOR ── */
+.search-row{display:flex;gap:10px;margin-bottom:24px;max-width:480px;}
+.search-row input{
+  flex:1;background:var(--paper);border:2px solid var(--sand);
+  border-radius:100px;padding:12px 20px;font-family:var(--font-body);
+  font-size:.9rem;color:var(--ink);outline:none;
+}
+.search-row input:focus{border-color:var(--teal);}
+.search-row button{
+  font-family:var(--font-head);font-weight:700;font-size:.85rem;
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+  padding:12px 22px;border-radius:100px;cursor:pointer;
+}
+.search-row button:hover{background:var(--teal);border-color:var(--teal);}
+.no-results{padding:40px;text-align:center;color:#888;font-size:.95rem;}
+
+/* ── VIDEO EMBED EN MODAL ── */
+.m-video-box{margin:16px 0;}
+.m-video-box h4{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:10px;}
+.m-video-frame{
+  position:relative;width:100%;padding-bottom:56.25%;
+  background:var(--cream);border:2px solid var(--sand);border-radius:var(--r);overflow:hidden;
+}
+.m-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.m-video-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;color:#999;font-size:.85rem;text-align:center;padding:16px;
+}
+.m-video-placeholder .vp-ico{font-size:2.2rem;}
+
+/* ── LECTOR ── */
+.m-read-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--mint);border:1.5px solid var(--teal);color:var(--teal);
+  font-family:var(--font-head);font-weight:700;font-size:.85rem;
+  padding:9px 18px;border-radius:100px;cursor:pointer;margin-bottom:16px;transition:all .2s;
+}
+.m-read-btn:hover{background:var(--teal);color:#fff;}
+.m-read-btn.reading{background:var(--coral);border-color:var(--coral);color:#fff;}
+
+/* ── RUTAS ── */
+.rutas-wrap{max-width:1000px;margin:0 auto;padding:48px 40px;}
+.ruta-tabs{display:flex;gap:0;border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;margin-bottom:40px;}
+.r-tab{
+  flex:1;padding:16px 20px;border:none;background:var(--paper);
+  font-family:var(--font-head);font-size:.9rem;font-weight:700;
+  cursor:pointer;border-right:2px solid var(--ink);transition:all .2s;color:var(--ink);
+}
+.r-tab:last-child{border-right:none;}
+.r-tab.on{background:var(--ink);color:var(--paper);}
+.ruta-content{display:none;}
+.ruta-content.on{display:block;}
+.ruta-hero{
+  border-radius:var(--r2);padding:40px;margin-bottom:32px;
+  border:2px solid var(--ink);
+}
+.ruta-grade{font-family:var(--font-head);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;opacity:.7;}
+.ruta-title{font-family:var(--font-head);font-size:2rem;font-weight:800;margin-bottom:12px;}
+.ruta-sub{font-size:.95rem;line-height:1.7;opacity:.8;}
+.ruta-blocks{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;}
+.ruta-block{background:var(--paper);border:2px solid var(--sand);border-radius:var(--r2);padding:28px;}
+.ruta-block h4{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:14px;}
+.ruta-block ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ruta-block ul li{font-size:.87rem;color:#444;line-height:1.5;display:flex;gap:10px;}
+.ruta-block ul li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0;}
+.ruta-videos h3{font-family:var(--font-head);font-size:1.3rem;font-weight:700;margin-bottom:20px;}
+.vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.vid-card{background:var(--cream);border:2px solid var(--sand);border-radius:var(--r2);overflow:hidden;}
+.vid-thumb{
+  height:140px;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;border-bottom:2px solid var(--sand);
+}
+.vid-info{padding:16px;}
+.vid-info h5{font-family:var(--font-head);font-size:.95rem;font-weight:700;margin-bottom:4px;}
+.vid-info p{font-size:.78rem;color:#888;}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:32px;}
+.tip-card{background:var(--warm);border:2px solid var(--amber);border-radius:var(--r2);padding:24px;}
+.tip-card .tip-ico{font-size:1.5rem;margin-bottom:10px;}
+.tip-card h5{font-family:var(--font-head);font-size:.95rem;font-weight:700;margin-bottom:8px;}
+.tip-card p{font-size:.8rem;color:#666;line-height:1.6;}
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+.info-card{background:var(--mint);border:2px solid var(--teal);border-radius:var(--r2);padding:28px;}
+.info-card h4{font-family:var(--font-head);font-weight:700;margin-bottom:12px;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.info-card ul li{font-size:.85rem;color:#444;display:flex;gap:8px;}
+.info-card ul li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0;}
+
+/* ── CHAT ── */
+.chat-fab{
+  position:fixed;bottom:28px;right:28px;z-index:300;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--ink);border:2px solid var(--ink);color:var(--paper);
+  font-size:1.3rem;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+.chat-fab:hover{background:var(--teal);border-color:var(--teal);}
+.chat-panel{
+  position:fixed;bottom:96px;right:28px;z-index:300;
+  width:340px;background:var(--paper);border:2px solid var(--ink);
+  border-radius:var(--r2);overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.2);
+  display:none;flex-direction:column;max-height:460px;
+}
+.chat-panel.on{display:flex;}
+.chat-hd{background:var(--ink);color:var(--paper);padding:16px 20px;display:flex;align-items:center;gap:12px;}
+.chat-av{width:34px;height:34px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.chat-hd h4{font-family:var(--font-head);font-size:.95rem;font-weight:700;}
+.chat-hd p{font-size:.72rem;opacity:.6;}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:.84rem;line-height:1.5;}
+.msg.bot{background:var(--cream);border:1.5px solid var(--sand);align-self:flex-start;}
+.msg.usr{background:var(--ink);color:var(--paper);align-self:flex-end;border-radius:14px 14px 4px 14px;}
+.chat-ir{padding:12px;border-top:2px solid var(--sand);display:flex;gap:8px;}
+.chat-in{
+  flex:1;background:var(--cream);border:2px solid var(--sand);
+  border-radius:100px;padding:8px 16px;color:var(--ink);
+  font-family:var(--font-body);font-size:.84rem;outline:none;
+}
+.chat-in:focus{border-color:var(--teal);}
+.chat-sd{
+  background:var(--ink);border:none;border-radius:50%;
+  width:36px;height:36px;cursor:pointer;color:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  transition:background .2s;flex-shrink:0;
+}
+.chat-sd:hover{background:var(--teal);}
+
+/* ── A11Y ── */
+.a11y{
+  position:fixed;top:50%;right:0;transform:translateY(-50%);
+  background:var(--paper);border:2px solid var(--ink);border-right:none;
+  border-radius:12px 0 0 12px;z-index:150;
+  display:flex;flex-direction:column;padding:8px 6px;gap:4px;
+}
+.a-btn{
+  background:none;border:none;cursor:pointer;
+  width:36px;height:36px;border-radius:8px;font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  color:#555;transition:all .2s;font-family:var(--font-head);font-weight:700;
+}
+.a-btn:hover{background:var(--mint);color:var(--teal);}
+
+/* ── FOOTER ── */
+footer{
+  border-top:2px solid var(--ink);padding:40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.f-logo{font-family:var(--font-head);font-size:1.3rem;font-weight:800;letter-spacing:-1px;}
+.f-logo span{color:var(--teal);}
+footer p{font-size:.8rem;color:#888;}
+
+/* ── MODAL OVERLAY ── */
+.overlay{
+  position:fixed;inset:0;background:rgba(15,14,23,.6);z-index:400;
+  display:none;align-items:center;justify-content:center;padding:24px;
+}
+.overlay.on{display:flex;}
+.modal{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--r2);
+  max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:40px;
+  position:relative;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:none;border:none;
+  font-size:1.2rem;cursor:pointer;color:#888;
+}
+.modal h2{font-family:var(--font-head);font-size:1.5rem;font-weight:800;margin-bottom:6px;}
+.modal .m-tag{font-size:.78rem;color:var(--teal);font-weight:600;margin-bottom:16px;display:block;}
+.modal hr{border:none;border-top:2px solid var(--sand);margin:20px 0;}
+.modal h4{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:10px;}
+.modal ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.modal ul li{font-size:.88rem;color:#444;display:flex;gap:10px;line-height:1.5;}
+.modal ul li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0;}
+.modal p{font-size:.9rem;color:#444;line-height:1.7;margin-bottom:16px;}
+.modal .m-salary{
+  display:inline-block;background:var(--mint);border:1.5px solid var(--teal);
+  color:var(--teal);font-weight:700;padding:8px 18px;border-radius:100px;
+  font-size:.9rem;margin-bottom:16px;
+}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  nav{padding:0 20px;}
+  .sec{padding:60px 20px;}
+  .area-grid{grid-template-columns:1fr 1fr;}
+  .ruta-blocks,.tips-grid,.info-cards{grid-template-columns:1fr;}
+  .careers-wrap,.rutas-wrap{padding:40px 20px;}
+  .f-btn{font-size:.78rem;padding:6px 14px;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .a11y{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- A11Y -->
+<div class="a11y" role="toolbar" aria-label="Herramientas de accesibilidad">
+  <button class="a-btn" onclick="toggleTheme()" title="Modo oscuro/claro" aria-label="Alternar modo oscuro y claro">🌙</button>
+  <button class="a-btn" onclick="fs(1)" title="Aumentar tamaño de letra" aria-label="Aumentar tamaño de letra">A+</button>
+  <button class="a-btn" onclick="fs(-1)" title="Reducir tamaño de letra" aria-label="Reducir tamaño de letra">A-</button>
+  <button class="a-btn" onclick="hiContrast()" title="Alto contraste" aria-label="Alternar alto contraste">◐</button>
+  <button class="a-btn" onclick="readPage()" title="Leer contenido en voz alta" aria-label="Leer la página en voz alta">🔊</button>
+</div>
+
+<!-- CHAT -->
+<button class="chat-fab" onclick="toggleChat()">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-hd">
+    <div class="chat-av">🤖</div>
+    <div><h4>Orienta IA</h4><p>Asistente vocacional</p></div>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg bot">¡Hola! Soy tu asistente. Pregúntame sobre carreras, universidades, becas o qué carrera es para ti 🎓</div>
+  </div>
+  <div class="chat-ir">
+    <input class="chat-in" id="chatIn" placeholder="Escribe tu pregunta…" onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-sd" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="careerModal" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="screen-home" class="screen active">
+<nav>
+  <div class="nl" onclick="goTo('home')">Futuro<span>360</span></div>
+  <div class="nr">
+    <button onclick="goTo('rutas')">Rutas</button>
+    <button onclick="goTo('careers')">Carreras</button>
+    <button class="nb" onclick="goTo('test')">Hacer el Test →</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">✦ Test Vocacional Inteligente</div>
+    <h1>Descubre tu<br><em>carrera</em><br>ideal</h1>
+    <p class="hero-sub">Responde nuestro test de 30 preguntas y la IA analizará tus intereses, habilidades y personalidad para recomendarte la carrera perfecta.</p>
+    <div class="hero-btns">
+      <button class="btn-ink" onclick="goTo('test')">🚀 Empezar Test</button>
+      <button class="btn-out" onclick="goTo('careers')">Ver Carreras</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-cards">
+      <div class="stat-card accent"><div class="num">30</div><div class="lbl">Preguntas inteligentes</div></div>
+      <div class="stat-card"><div class="num" style="color:var(--amber)">100+</div><div class="lbl">Carreras evaluadas</div></div>
+      <div class="stat-card"><div class="num" style="color:var(--paper)">8</div><div class="lbl">Áreas vocacionales</div></div>
+      <div class="stat-card"><div class="num" style="color:var(--teal2)">3</div><div class="lbl">Rutas por grado</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec">
+  <div class="sec-line">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">¿Cuál es tu mundo?</h2>
+  </div>
+  <div class="area-grid">
+    <div class="area-cell" onclick="filterAndGoTo('tec')"><div class="ic">💻</div><h4>Tecnología e Ingeniería</h4><p>Software, robótica, sistemas, electrónica, IA</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('sal')"><div class="ic">🏥</div><h4>Salud</h4><p>Medicina, enfermería, psicología, nutrición</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('neg')"><div class="ic">📈</div><h4>Negocios</h4><p>Administración, marketing, finanzas, logística</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('art')"><div class="ic">🎨</div><h4>Arte y Diseño</h4><p>Diseño gráfico, arquitectura, música, moda</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('edu')"><div class="ic">👨‍🏫</div><h4>Educación</h4><p>Pedagogía, psicología educativa, trabajo social</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('der')"><div class="ic">⚖️</div><h4>Derecho</h4><p>Leyes, criminología, ciencias políticas</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('tur')"><div class="ic">✈️</div><h4>Turismo y Gastronomía</h4><p>Hotelería, cocina, guía turístico</p></div>
+    <div class="area-cell" onclick="filterAndGoTo('nat')"><div class="ic">🌱</div><h4>Ciencias Naturales</h4><p>Biología, ecología, biotecnología, química</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec" style="text-align:center;">
+  <div style="background:var(--ink);color:var(--paper);border-radius:var(--r2);padding:72px 60px;">
+    <p style="font-family:var(--font-head);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-bottom:16px;">¿Listo para el siguiente paso?</p>
+    <h2 style="font-family:var(--font-head);font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:16px;">El test dura solo<br><span style="color:var(--amber)">5 minutos</span></h2>
+    <p style="opacity:.6;max-width:420px;margin:0 auto 32px;line-height:1.7;">Analiza tus intereses, habilidades y personalidad para mostrarte las carreras con mayor afinidad.</p>
+    <button class="btn-ink" style="background:var(--teal);border-color:var(--teal);font-size:1rem;" onclick="goTo('test')">Comenzar ahora →</button>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Futuro<span>360</span></div>
+  <p>Orientación vocacional inteligente · Hecho para estudiantes peruanos</p>
+  <p>© 2025 Futuro360</p>
+</footer>
+</div>
+
+<!-- ══════════ TEST ══════════ -->
+<div id="screen-test" class="screen">
+<nav>
+  <div class="nl" onclick="goTo('home')">Futuro<span>360</span></div>
+  <div class="nr"><button onclick="goTo('home')">← Salir</button></div>
+</nav>
+<div class="test-wrap">
+  <div class="prog-track"><div class="prog-fill" id="pFill"></div></div>
+  <div class="prog-meta"><span id="pLabel">Pregunta 1 de 30</span><span id="pPct">0%</span></div>
+  <div id="qArea"></div>
+  <div style="overflow:hidden;padding-bottom:40px;">
+    <button class="btn-next" id="btnNext" onclick="nextQ()">Siguiente →</button>
+  </div>
+</div>
+</div>
+
+<!-- ══════════ RESULTS ══════════ -->
+<div id="screen-results" class="screen">
+<nav>
+  <div class="nl" onclick="goTo('home')">Futuro<span>360</span></div>
+  <div class="nr">
+    <button onclick="goTo('test')">Repetir Test</button>
+    <button class="nb" onclick="goTo('careers')">Ver Carreras</button>
+  </div>
+</nav>
+<div class="res-wrap">
+  <div class="res-hero">
+    <div class="res-trophy">🏆</div>
+    <div>
+      <h2>Tu Perfil Vocacional</h2>
+      <p id="resSubtitle">Basado en tus 30 respuestas</p>
+    </div>
+  </div>
+  <div class="res-bars-card">
+    <h3>📊 Afinidad por Área</h3>
+    <div id="resBars"></div>
+  </div>
+  <div class="rec-card">
+    <h3>🎓 Carreras Recomendadas</h3>
+    <div class="chips" id="resChips"></div>
+  </div>
+  <div class="profile-box">
+    <h3>🧠 Tu Perfil de Personalidad</h3>
+    <p id="resProfile"></p>
+  </div>
+  <div class="res-actions">
+    <button class="btn-ink" onclick="goTo('careers')">Explorar Carreras →</button>
+    <button class="btn-out" onclick="goTo('rutas')">Ver Rutas por Grado</button>
+    <button class="btn-out" onclick="goTo('test')">Repetir Test</button>
+  </div>
+</div>
+</div>
+
+<!-- ══════════ CAREERS ══════════ -->
+<div id="screen-careers" class="screen">
+<nav>
+  <div class="nl" onclick="goTo('home')">Futuro<span>360</span></div>
+  <div class="nr">
+    <button onclick="goTo('home')">Inicio</button>
+    <button class="nb" onclick="goTo('test')">Hacer el Test</button>
+  </div>
+</nav>
+<div class="careers-wrap">
+  <div class="sec-line" style="margin-bottom:8px;">
+    <span class="sec-num">Carreras</span>
+    <h2 class="sec-title">Explorador de Carreras</h2>
+  </div>
+  <p style="color:#888;margin-bottom:24px;font-size:.9rem;">Haz clic en cualquier carrera para ver la descripción completa, salario, habilidades y más.</p>
+  <div class="search-row">
+    <input id="careerSearch" type="text" placeholder="🔍 Buscar carrera (ej: medicina, diseño, derecho...)" oninput="renderCareers()">
+    <button onclick="document.getElementById('careerSearch').value='';renderCareers();">Limpiar</button>
+  </div>
+  <div class="filter-row" id="filterRow"></div>
+  <div class="careers-grid" id="careersGrid"></div>
+</div>
+</div>
+
+<!-- ══════════ RUTAS ══════════ -->
+<div id="screen-rutas" class="screen">
+<nav>
+  <div class="nl" onclick="goTo('home')">Futuro<span>360</span></div>
+  <div class="nr">
+    <button onclick="goTo('home')">Inicio</button>
+    <button class="nb" onclick="goTo('test')">Hacer el Test</button>
+  </div>
+</nav>
+<div class="rutas-wrap">
+  <div class="sec-line" style="margin-bottom:32px;">
+    <span class="sec-num">Rutas</span>
+    <h2 class="sec-title">Rutas del Futuro</h2>
+  </div>
+  <p style="color:#666;margin-bottom:32px;">Contenido diseñado especialmente según tu grado escolar.</p>
+
+  <div class="ruta-tabs">
+    <button class="r-tab on" onclick="switchRuta(0)">🔭 Exploradores<br><small style="font-weight:400;font-size:.72rem">1° y 2° Secundaria</small></button>
+    <button class="r-tab" onclick="switchRuta(1)">🔬 Investigadores<br><small style="font-weight:400;font-size:.72rem">3° y 4° Secundaria</small></button>
+    <button class="r-tab" onclick="switchRuta(2)">🎯 Decisores<br><small style="font-weight:400;font-size:.72rem">5° Secundaria</small></button>
+  </div>
+
+  <!-- RUTA 0: EXPLORADORES -->
+  <div class="ruta-content on" id="ruta0">
+    <div class="ruta-hero" style="background:var(--mint);">
+      <div class="ruta-grade">1° y 2° de Secundaria</div>
+      <div class="ruta-title">🔭 Ruta Exploradores</div>
+      <div class="ruta-sub">Todavía tienes tiempo para descubrirte. Esta ruta te ayuda a conocer tus talentos, desarrollar tu autoestima y explorar el mundo de las posibilidades.</div>
+    </div>
+    <div class="ruta-blocks">
+      <div class="ruta-block">
+        <h4>🎯 ¿Qué aprenderás?</h4>
+        <ul>
+          <li>Reconocer tus fortalezas y talentos naturales</li>
+          <li>Diferenciar entre gustos, habilidades y pasiones</li>
+          <li>Entender qué son las habilidades blandas</li>
+          <li>Explorar áreas como arte, ciencia, deporte y tecnología</li>
+          <li>Desarrollar autoconfianza y resiliencia</li>
+          <li>Aprender a trabajar en equipo</li>
+        </ul>
+      </div>
+      <div class="ruta-block">
+        <h4>🎮 Actividades de la Ruta</h4>
+        <ul>
+          <li>Test de talentos con resultados visuales</li>
+          <li>Juego "¿Qué superheroe vocacional eres?"</li>
+          <li>Actividad: Mapa de mis intereses</li>
+          <li>Reto semanal: Aprende algo nuevo cada semana</li>
+          <li>Diario vocacional: escribe lo que disfrutas</li>
+          <li>Quiz: ¿Eres más creativo, analítico o social?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ruta-videos">
+      <h3>📹 Contenido para ti</h3>
+      <div class="vid-grid">
+        <div class="vid-card"><div class="vid-thumb" style="background:#e0f2f1;">🎨</div><div class="vid-info"><h5>¿Eres creativo sin saberlo?</h5><p>Descubre tu talento artístico oculto</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#fff8e1;">🧩</div><div class="vid-info"><h5>Habilidades blandas: ¿qué son?</h5><p>Comunicación, trabajo en equipo y más</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#fce4ec;">🌟</div><div class="vid-info"><h5>Autoestima y metas personales</h5><p>Cómo creer en ti mismo desde el colegio</p></div></div>
+      </div>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-ico">📓</div><h5>Consejo 1</h5><p>Haz una lista de las 5 cosas que más disfrutas hacer. Eso ya es una pista de tu vocación.</p></div>
+      <div class="tip-card"><div class="tip-ico">🗣️</div><h5>Consejo 2</h5><p>Pregúntale a adultos de tu familia en qué eres bueno. A veces ellos ven lo que tú no ves.</p></div>
+      <div class="tip-card"><div class="tip-ico">🌍</div><h5>Consejo 3</h5><p>No hay una sola vocación correcta. Explora, equivócate y aprende: eso es lo que importa ahora.</p></div>
+    </div>
+  </div>
+
+  <!-- RUTA 1: INVESTIGADORES -->
+  <div class="ruta-content" id="ruta1">
+    <div class="ruta-hero" style="background:var(--warm);">
+      <div class="ruta-grade">3° y 4° de Secundaria</div>
+      <div class="ruta-title">🔬 Ruta Investigadores</div>
+      <div class="ruta-sub">Ya conoces tus gustos. Ahora es momento de investigar el mundo laboral, conocer carreras reales y entender cómo funciona el mercado profesional.</div>
+    </div>
+    <div class="ruta-blocks">
+      <div class="ruta-block">
+        <h4>📚 ¿Qué aprenderás?</h4>
+        <ul>
+          <li>Diferencias entre universidad, instituto y CETPRO</li>
+          <li>Cómo funciona el mercado laboral en el Perú</li>
+          <li>Carreras con alta demanda en los próximos años</li>
+          <li>Perfil profesional de cada área vocacional</li>
+          <li>Cómo investigar una carrera antes de elegirla</li>
+          <li>Qué es la empleabilidad y cómo desarrollarla</li>
+        </ul>
+      </div>
+      <div class="ruta-block">
+        <h4>🔍 Actividades de la Ruta</h4>
+        <ul>
+          <li>Entrevista a un profesional de tu área de interés</li>
+          <li>Investigación: salarios reales en Perú por carrera</li>
+          <li>Análisis: "Un día en la vida de un ingeniero/médico/diseñador"</li>
+          <li>Comparar 3 universidades de tu ciudad</li>
+          <li>Visita virtual a ferias vocacionales</li>
+          <li>Proyecto: "Mi ruta profesional ideal"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ruta-videos">
+      <h3>📹 Videos "Un día en la vida de…"</h3>
+      <div class="vid-grid">
+        <div class="vid-card"><div class="vid-thumb" style="background:#e3f2fd;">💻</div><div class="vid-info"><h5>Un día como desarrollador de software</h5><p>Qué hace, dónde trabaja y cuánto gana</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#f3e5f5;">🏥</div><div class="vid-info"><h5>Un día como médico en Perú</h5><p>Guardia, consultas y especialidades</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#e8f5e9;">🍳</div><div class="vid-info"><h5>Un día como chef profesional</h5><p>Cocina de restaurante, pastelería y más</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#fff3e0;">📊</div><div class="vid-info"><h5>Un día como administrador de empresas</h5><p>Reuniones, proyectos y decisiones</p></div></div>
+      </div>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>📈 Carreras con alta demanda 2025–2030</h4>
+        <ul>
+          <li>Ingeniería de Software y Ciberseguridad</li>
+          <li>Ciencia de Datos e Inteligencia Artificial</li>
+          <li>Medicina Humana y Psicología</li>
+          <li>Marketing Digital y UX/UI</li>
+          <li>Logística y Cadena de Suministro</li>
+          <li>Enfermería y Terapia Física</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🏛️ Tipos de estudio en Perú</h4>
+        <ul>
+          <li>Universidad: 5 a 7 años, título universitario</li>
+          <li>Instituto Superior: 3 años, título técnico</li>
+          <li>CETPRO: 6 meses a 2 años, certificación técnica</li>
+          <li>Escuelas especializadas: arte, música, gastronomía</li>
+          <li>Cursos en línea + certificaciones internacionales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUTA 2: DECISORES -->
+  <div class="ruta-content" id="ruta2">
+    <div class="ruta-hero" style="background:#fce4ec;">
+      <div class="ruta-grade">5° de Secundaria</div>
+      <div class="ruta-title">🎯 Ruta Decisores</div>
+      <div class="ruta-sub">Este es tu momento de decidir. Te damos toda la información que necesitas para elegir tu carrera, postular y comenzar tu vida universitaria con éxito.</div>
+    </div>
+    <div class="ruta-blocks">
+      <div class="ruta-block">
+        <h4>🎓 ¿Qué aprenderás?</h4>
+        <ul>
+          <li>Cómo elegir entre universidad e instituto</li>
+          <li>Proceso de admisión paso a paso</li>
+          <li>Cómo postular a Beca 18 y Beca Bicentenario</li>
+          <li>Cómo elaborar tu primer currículum vitae</li>
+          <li>Cómo prepararte emocionalmente para el cambio</li>
+          <li>Qué esperar del primer año universitario</li>
+        </ul>
+      </div>
+      <div class="ruta-block">
+        <h4>🛠️ Herramientas de la Ruta</h4>
+        <ul>
+          <li>Plantilla descargable de CV para egresados</li>
+          <li>Guía: Cómo postular a Beca 18 (PRONABEC)</li>
+          <li>Comparador de universidades por carrera</li>
+          <li>Simulador de examen de admisión</li>
+          <li>Checklist: Todo lo que necesitas al ingresar</li>
+          <li>Consejos para la carta de motivación</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ruta-videos">
+      <h3>📹 Guías prácticas</h3>
+      <div class="vid-grid">
+        <div class="vid-card"><div class="vid-thumb" style="background:#e8eaf6;">📝</div><div class="vid-info"><h5>Cómo hacer tu primer CV sin experiencia</h5><p>Paso a paso con ejemplos reales</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#e0f2f1;">💰</div><div class="vid-info"><h5>Becas disponibles en Perú 2025</h5><p>Beca 18, Bicentenario, Pronabec y más</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#fff3e0;">🏫</div><div class="vid-info"><h5>¿Universidad o Instituto?</h5><p>Ventajas, costos y tiempo de cada opción</p></div></div>
+        <div class="vid-card"><div class="vid-thumb" style="background:#fce4ec;">😌</div><div class="vid-info"><h5>Manejo del estrés vocacional</h5><p>Cómo decidir sin miedo al futuro</p></div></div>
+      </div>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card" style="background:#e8eaf6;border-color:#7986cb;"><div class="tip-ico">📋</div><h5>Proceso de admisión</h5><p>Investiga las fechas de postulación de cada universidad con al menos 6 meses de anticipación. Prepararte a tiempo marca la diferencia.</p></div>
+      <div class="tip-card" style="background:#e0f2f1;border-color:var(--teal);"><div class="tip-ico">🎓</div><h5>Becas disponibles</h5><p>Beca 18 cubre todo: matrícula, pensión, alimentación y útiles. Visita pronabec.gob.pe para ver los requisitos y fechas de postulación.</p></div>
+      <div class="tip-card" style="background:#fff8e1;border-color:var(--amber);"><div class="tip-ico">💪</div><h5>No tengas miedo</h5><p>Elegir carrera es importante, pero no es para siempre. Muchos profesionales exitosos cambiaron de rumbo. Lo que importa es empezar.</p></div>
+    </div>
+  </div>
+
+</div><!-- /rutas-wrap -->
+</div><!-- /screen-rutas -->
+
+<script>
+// ═══════════════════════════
+// DATA: CAREERS
+// ═══════════════════════════
+const AREAS=[
+  {id:'tec',name:'Tecnología',emoji:'💻',color:'#00897b',bg:'#e0f2f1'},
+  {id:'sal',name:'Salud',     emoji:'🏥',color:'#e53935',bg:'#ffebee'},
+  {id:'neg',name:'Negocios',  emoji:'📈',color:'#f57c00',bg:'#fff3e0'},
+  {id:'art',name:'Arte',      emoji:'🎨',color:'#8e24aa',bg:'#f3e5f5'},
+  {id:'edu',name:'Educación', emoji:'👨‍🏫',color:'#1976d2',bg:'#e3f2fd'},
+  {id:'der',name:'Derecho',   emoji:'⚖️',color:'#455a64',bg:'#eceff1'},
+  {id:'tur',name:'Turismo',   emoji:'✈️',color:'#f4511e',bg:'#fbe9e7'},
+  {id:'nat',name:'Ciencias',  emoji:'🌱',color:'#388e3c',bg:'#e8f5e9'},
+];
+
+const CAREERS=[
+  // TECNOLOGÍA
+  {id:'c1',area:'tec',name:'Ingeniería de Software',type:'Universitaria',salary:'S/ 4,000–8,500',demand:'high',
+   desc:'Diseña, desarrolla y mantiene aplicaciones y sistemas de software. Trabaja con lenguajes como Python, Java y JavaScript para crear soluciones tecnológicas que usan millones de personas.',
+   donde:'Empresas tecnológicas, startups, bancos, gobierno, trabajo remoto internacional.',
+   skills:['Programación y lógica','Trabajo en equipo ágil','Resolución de problemas','Bases de datos','Inglés técnico'],
+   unis:['PUCP','UTEC','UPC','USIL','San Marcos'],
+   duracion:'5 años',
+   videoId:'c1zXL4eiVSk'},
+  {id:'c2',area:'tec',name:'Ingeniería de Sistemas',type:'Universitaria',salary:'S/ 3,500–7,000',demand:'high',
+   desc:'Gestiona la infraestructura tecnológica de las organizaciones. Planifica redes, servidores, seguridad informática y la integración de sistemas para que todo funcione correctamente.',
+   donde:'Empresas de todos los sectores, consultoras IT, gobierno, telecomunicaciones.',
+   skills:['Redes y servidores','Gestión de proyectos TI','Seguridad informática','Análisis de sistemas','Bases de datos'],
+   unis:['San Marcos','UNI','PUCP','UTP','Telesup'],
+   duracion:'5 años',
+   videoId:'7O0q6L061Y0'},
+  {id:'c3',area:'tec',name:'Ciberseguridad',type:'Universitaria',salary:'S/ 5,000–12,000',demand:'high',
+   desc:'Protege sistemas, redes y datos de ataques cibernéticos. Es una de las carreras con mayor demanda global y salarios más altos. Los hackers éticos son especialmente valorados.',
+   donde:'Bancos, gobierno, empresas tecnológicas, consultoras de seguridad, trabajo remoto.',
+   skills:['Hacking ético','Criptografía','Análisis de vulnerabilidades','Redes','Inglés avanzado'],
+   unis:['PUCP','UTEC','UPC','UPN','Certifications: CompTIA, CEH'],
+   duracion:'5 años'},
+  {id:'c4',area:'tec',name:'Ciencia de Datos e IA',type:'Universitaria',salary:'S/ 4,500–10,000',demand:'high',
+   desc:'Analiza grandes volúmenes de datos para encontrar patrones y tomar decisiones inteligentes. Trabaja con Machine Learning, Inteligencia Artificial y modelos predictivos.',
+   donde:'Empresas de tecnología, fintech, salud, marketing digital, investigación.',
+   skills:['Python y R','Estadística avanzada','Machine Learning','SQL','Visualización de datos'],
+   unis:['PUCP','UTEC','UPC','UP'],
+   duracion:'5 años',
+   videoId:'Zui4QZ9Su-s'},
+  {id:'c5',area:'tec',name:'Ingeniería Mecatrónica',type:'Universitaria',salary:'S/ 3,000–6,500',demand:'med',
+   desc:'Combina mecánica, electrónica, computación y control automático. Diseña robots, sistemas automatizados y máquinas inteligentes para la industria.',
+   donde:'Fábricas, minería, industria manufacturera, investigación, proyectos de automatización.',
+   skills:['Robótica','Programación de PLCs','Electrónica','Mecánica','Automatización'],
+   unis:['UNI','PUCP','UCSM','UNSA'],
+   duracion:'5 años',
+   videoId:'ZazHF7tD1V4'},
+  {id:'c6',area:'tec',name:'Computación e Informática',type:'Técnica',salary:'S/ 1,800–3,800',demand:'high',
+   desc:'Instala, configura y mantiene equipos y redes informáticas. Brinda soporte técnico y administra sistemas para empresas de todos los tamaños.',
+   donde:'Empresas de todos los rubros, instituciones educativas, hospitales, gobierno.',
+   skills:['Soporte técnico','Redes LAN/WAN','Sistemas operativos','Hardware','Atención al cliente'],
+   unis:['SENATI','TECSUP','CERTUS','IDAT'],
+   duracion:'3 años',
+   videoId:'dn1aObYECEM'},
+  {id:'c7',area:'tec',name:'Diseño y Desarrollo Web',type:'Técnica',salary:'S/ 2,000–5,000',demand:'high',
+   desc:'Crea páginas web y aplicaciones web atractivas y funcionales. Combina diseño visual con programación front-end y back-end.',
+   donde:'Agencias digitales, startups, freelance, e-commerce, marketing digital.',
+   skills:['HTML/CSS/JavaScript','Diseño UX/UI','Frameworks web','SEO básico','Fotografía digital'],
+   unis:['IDAT','CIBERTEC','CERTUS','Platzi','Udemy'],
+   duracion:'2–3 años',
+   videoId:'gTkvmaINjjc'},
+  {id:'c8',area:'tec',name:'Ingeniería Civil',type:'Universitaria',salary:'S/ 3,000–7,000',demand:'med',
+   desc:'Diseña, construye y supervisa infraestructura como edificios, puentes, carreteras y sistemas de agua. Es una de las carreras clásicas con mayor campo laboral en el Perú.',
+   donde:'Constructoras, gobierno, minería, consulting de infraestructura.',
+   skills:['AutoCAD','Cálculo estructural','Gestión de obras','Topografía','Normas técnicas'],
+   unis:['UNI','PUCP','San Marcos','UCSM','UPN'],
+   duracion:'5 años',
+   videoId:'1TM7y3PWhxg'},
+
+  // SALUD
+  {id:'c9',area:'sal',name:'Medicina Humana',type:'Universitaria',salary:'S/ 5,000–15,000',demand:'high',
+   desc:'Diagnostica, trata y previene enfermedades en pacientes de todas las edades. Es una de las carreras más exigentes y mejor valoradas del mundo. Requiere vocación de servicio y dedicación total.',
+   donde:'Hospitales, clínicas, centros de salud, investigación, OPS/OMS, trabajo independiente.',
+   skills:['Anatomía y fisiología','Diagnóstico clínico','Empatía y comunicación','Trabajo bajo presión','Inglés médico'],
+   unis:['San Marcos','UPCH','UCSM','UNFV','URP'],
+   duracion:'7 años + residencia',
+   videoId:'j8fU3m8OxWk'},
+  {id:'c10',area:'sal',name:'Psicología',type:'Universitaria',salary:'S/ 2,500–5,500',demand:'high',
+   desc:'Estudia el comportamiento humano y los procesos mentales. Trabaja en salud mental, organizaciones, educación, criminología y deporte. La demanda ha crecido enormemente tras la pandemia.',
+   donde:'Clínicas, hospitales, empresas (RRHH), colegios, centros de rehabilitación.',
+   skills:['Escucha activa','Evaluación psicológica','Empatía','Diagnóstico clínico','Ética profesional'],
+   unis:['PUCP','USMP','URP','San Marcos','UNFV'],
+   duracion:'5 años',
+   videoId:'iASX6cu4GaQ'},
+  {id:'c11',area:'sal',name:'Enfermería',type:'Universitaria',salary:'S/ 2,000–4,500',demand:'high',
+   desc:'Cuida y asiste a pacientes durante su recuperación. Aplica tratamientos, administra medicamentos y coordina con el equipo médico. Es esencial en todo sistema de salud.',
+   donde:'Hospitales públicos y privados, clínicas, centros de salud, ONGs de salud.',
+   skills:['Cuidados clínicos','Farmacología básica','Empatía y paciencia','Trabajo en equipo','Primeros auxilios'],
+   unis:['San Marcos','UPCH','UNMSM','UNFV'],
+   duracion:'5 años'},
+  {id:'c12',area:'sal',name:'Nutrición y Dietética',type:'Universitaria',salary:'S/ 2,000–4,500',demand:'med',
+   desc:'Diseña planes de alimentación saludable para personas sanas y enfermas. Trabaja en prevención de enfermedades crónicas, deporte de alto rendimiento y salud pública.',
+   donde:'Hospitales, clínicas, clubes deportivos, empresas de alimentos, consulta independiente.',
+   skills:['Bioquímica nutricional','Evaluación antropométrica','Consejería alimentaria','Dietoterapia','Investigación'],
+   unis:['USMP','UNFV','San Marcos','UCSM'],
+   duracion:'5 años'},
+  {id:'c13',area:'sal',name:'Odontología',type:'Universitaria',salary:'S/ 3,000–8,000',demand:'med',
+   desc:'Diagnostica y trata enfermedades de la boca, dientes y encías. Con especialización puede dedicarse a ortodoncia, implantes, odontopediatría y cirugía maxilofacial.',
+   donde:'Consultorios privados, clínicas dentales, hospitales, fuerzas armadas.',
+   skills:['Destreza manual','Diagnóstico oral','Radiología dental','Empatía con pacientes','Ciencias básicas'],
+   unis:['UPCH','USMP','URP','San Marcos','UCSM'],
+   duracion:'6 años'},
+  {id:'c14',area:'sal',name:'Terapia Física y Rehabilitación',type:'Universitaria',salary:'S/ 2,000–4,500',demand:'med',
+   desc:'Recupera la movilidad y función de pacientes con lesiones o enfermedades. Trabaja con deportistas, adultos mayores y personas con discapacidad usando técnicas físicas especializadas.',
+   donde:'Hospitales, clínicas, centros de rehabilitación, clubes deportivos, trabajo independiente.',
+   skills:['Anatomía del movimiento','Técnicas de fisioterapia','Masoterapia','Electroterapia','Empatía'],
+   unis:['USMP','UNFV','UCSM','URP'],
+   duracion:'5 años'},
+  {id:'c15',area:'sal',name:'Enfermería Técnica',type:'Técnica',salary:'S/ 1,400–2,800',demand:'high',
+   desc:'Brinda cuidados básicos de enfermería bajo supervisión médica. Asiste en procedimientos, cuida pacientes y apoya al equipo de salud en hospitales y centros de salud.',
+   donde:'Hospitales, clínicas, centros de salud, hogares de ancianos.',
+   skills:['Cuidados básicos','Primeros auxilios','Trabajo en equipo','Empatía','Normas de bioseguridad'],
+   unis:['SENATI','CETPRO','institutos locales'],
+   duracion:'2 años'},
+
+  // NEGOCIOS
+  {id:'c16',area:'neg',name:'Administración de Empresas',type:'Universitaria',salary:'S/ 2,500–6,000',demand:'high',
+   desc:'Gestiona el funcionamiento y crecimiento de las organizaciones. Planifica estrategias, administra recursos humanos, financieros y operativos para lograr los objetivos de la empresa.',
+   donde:'Empresas de todos los sectores, gobierno, ONGs, emprendimientos propios.',
+   skills:['Liderazgo','Planificación estratégica','Finanzas básicas','Comunicación','Negociación'],
+   unis:['ESAN','UP','PUCP','UPC','USIL'],
+   duracion:'5 años'},
+  {id:'c17',area:'neg',name:'Marketing Digital',type:'Universitaria',salary:'S/ 2,500–6,000',demand:'high',
+   desc:'Crea y ejecuta estrategias de comunicación y ventas en medios digitales. Gestiona redes sociales, campañas de publicidad online, SEO y contenido para marcas y empresas.',
+   donde:'Agencias de marketing, empresas de e-commerce, startups, trabajo freelance.',
+   skills:['Redes sociales','Google Ads / Meta Ads','SEO/SEM','Análisis de datos','Creatividad'],
+   unis:['UPC','USIL','UP','PUCP','Platzi Certifications'],
+   duracion:'5 años'},
+  {id:'c18',area:'neg',name:'Contabilidad',type:'Universitaria',salary:'S/ 2,000–5,000',demand:'high',
+   desc:'Registra, analiza y reporta la información financiera de las organizaciones. Gestiona impuestos, auditorías y asesoría contable. Es indispensable en toda empresa.',
+   donde:'Empresas de todos los rubros, estudios contables, gobierno, trabajo independiente.',
+   skills:['Normas contables (NIIF)','Software contable','Tributación','Excel avanzado','Análisis financiero'],
+   unis:['San Marcos','UTP','UCV','USMP','UNI'],
+   duracion:'5 años'},
+  {id:'c19',area:'neg',name:'Negocios Internacionales',type:'Universitaria',salary:'S/ 3,000–7,000',demand:'high',
+   desc:'Gestiona el comercio y relaciones económicas entre países. Trabaja en importaciones, exportaciones, tratados comerciales, logística internacional y representación de marcas globales.',
+   donde:'Empresas exportadoras, aduanas, agencias de carga, embajadas, organismos internacionales.',
+   skills:['Inglés avanzado','Comercio exterior','Logística','Negociación intercultural','Economía'],
+   unis:['UP','ESAN','UPC','PUCP','USIL'],
+   duracion:'5 años'},
+  {id:'c20',area:'neg',name:'Logística y Cadena de Suministro',type:'Universitaria',salary:'S/ 2,500–6,000',demand:'high',
+   desc:'Gestiona el flujo de productos desde el proveedor hasta el cliente final. Coordina almacenes, transporte, importaciones y distribución para que los productos lleguen a tiempo y al menor costo.',
+   donde:'Empresas de retail, industria, comercio exterior, operadores logísticos.',
+   skills:['Gestión de inventarios','ERP (SAP)','Comercio exterior','Análisis de costos','Inglés'],
+   unis:['UPC','USIL','San Marcos','ESAN'],
+   duracion:'5 años'},
+
+  // ARTE Y DISEÑO
+  {id:'c21',area:'art',name:'Diseño UX/UI',type:'Universitaria',salary:'S/ 3,000–8,000',demand:'high',
+   desc:'Crea interfaces digitales intuitivas y atractivas para aplicaciones y páginas web. Se enfoca en la experiencia del usuario, combinando psicología, diseño visual y tecnología.',
+   donde:'Empresas tecnológicas, agencias digitales, startups, freelance, trabajo remoto.',
+   skills:['Figma / Adobe XD','Prototipado','User Research','Diseño visual','HTML/CSS básico'],
+   unis:['PUCP','UP','ISIL','IPAD','Platzi'],
+   duracion:'4–5 años'},
+  {id:'c22',area:'art',name:'Diseño Gráfico',type:'Universitaria',salary:'S/ 1,800–4,500',demand:'med',
+   desc:'Comunica ideas y mensajes de forma visual usando tipografía, color e imagen. Trabaja en branding, publicidad, diseño editorial, empaques y medios digitales.',
+   donde:'Agencias de publicidad, estudios de diseño, empresas, freelance, medios digitales.',
+   skills:['Adobe Illustrator / Photoshop','Tipografía','Diseño editorial','Branding','Creatividad'],
+   unis:['PUCP','ISIL','IPAD','Toulouse Lautrec','UP'],
+   duracion:'5 años'},
+  {id:'c23',area:'art',name:'Arquitectura',type:'Universitaria',salary:'S/ 2,500–7,000',demand:'med',
+   desc:'Diseña y supervisa la construcción de edificios, espacios públicos y ambientes interiores. Combina arte, técnica y funcionalidad para crear espacios que mejoran la calidad de vida.',
+   donde:'Estudios de arquitectura, constructoras, gobierno, diseño de interiores, docencia.',
+   skills:['AutoCAD / Revit','Diseño arquitectónico','Estructuras básicas','Historia del arte','Creatividad'],
+   unis:['PUCP','UNI','FAUA','UP','Ricardo Palma'],
+   duracion:'6 años'},
+  {id:'c24',area:'art',name:'Animación Digital',type:'Técnica',salary:'S/ 2,000–5,500',demand:'high',
+   desc:'Crea personajes, efectos visuales y animaciones para cine, televisión, videojuegos y publicidad. Combina creatividad artística con dominio de software especializado de animación 3D y 2D.',
+   donde:'Estudios de animación, empresas de videojuegos, productoras, freelance, publicidad.',
+   skills:['After Effects','Blender / Maya','Ilustración digital','Storytelling','Creatividad'],
+   unis:['ISIL','Toulouse Lautrec','IPAD','Cibertec','Certus'],
+   duracion:'3 años'},
+  {id:'c25',area:'art',name:'Diseño de Modas',type:'Técnica',salary:'S/ 1,500–4,000',demand:'med',
+   desc:'Crea colecciones de ropa, accesorios y textiles con identidad propia. Combina tendencias globales con técnicas de confección, patronaje y materiales textiles.',
+   donde:'Casas de moda, boutiques, industria textil, emprendimiento propio, exportación.',
+   skills:['Patronaje y confección','Diseño de colecciones','Ilustración de moda','Tendencias','Creatividad'],
+   unis:['Toulouse Lautrec','ISIL','IADT','Cibertec'],
+   duracion:'3 años'},
+
+  // EDUCACIÓN
+  {id:'c26',area:'edu',name:'Educación Inicial',type:'Universitaria',salary:'S/ 1,500–3,200',demand:'med',
+   desc:'Forma niños de 0 a 6 años en sus primeras etapas de desarrollo cognitivo, emocional y social. El trabajo con la primera infancia es fundamental para el desarrollo humano.',
+   donde:'Colegios privados y públicos, nidos, CEIs, ONGs, organismos internacionales.',
+   skills:['Psicología del desarrollo','Didáctica infantil','Lúdica y creatividad','Empatía','Paciencia'],
+   unis:['PUCP','San Marcos','UNE','USMP'],
+   duracion:'5 años'},
+  {id:'c27',area:'edu',name:'Psicología Educativa',type:'Universitaria',salary:'S/ 2,000–4,500',demand:'med',
+   desc:'Trabaja en el bienestar emocional y el aprendizaje de los estudiantes. Apoya a niños, adolescentes y familias en el contexto escolar y detecta dificultades de aprendizaje.',
+   donde:'Colegios, universidades, centros de salud mental, trabajo independiente.',
+   skills:['Evaluación psicológica','Orientación vocacional','Intervención en crisis','Empatía','Consejería'],
+   unis:['PUCP','San Marcos','USMP','URP'],
+   duracion:'5 años'},
+
+  // DERECHO
+  {id:'c28',area:'der',name:'Derecho',type:'Universitaria',salary:'S/ 2,500–10,000',demand:'med',
+   videoId:'msMpFeagf5E',
+   desc:'Interpreta y aplica las leyes para defender los derechos de personas, empresas e instituciones. Puede especializarse en derecho penal, civil, laboral, empresarial o internacional.',
+   donde:'Estudios jurídicos, empresas, gobierno, poder judicial, organismos internacionales.',
+   skills:['Argumentación jurídica','Redacción legal','Oratoria y debate','Análisis crítico','Ética'],
+   unis:['PUCP','USMP','San Marcos','URP','UCV'],
+   duracion:'5 años + bachillerato'},
+  {id:'c29',area:'der',name:'Ciencia Política',type:'Universitaria',salary:'S/ 2,000–5,000',demand:'med',
+   desc:'Analiza el poder, los sistemas de gobierno y las relaciones entre estados. Trabaja en políticas públicas, organismos internacionales, partidos políticos y periodismo político.',
+   donde:'Gobierno, ONGs, organismos internacionales, think tanks, periodismo.',
+   skills:['Análisis político','Relaciones internacionales','Investigación social','Estadística','Inglés'],
+   unis:['PUCP','San Marcos','UP'],
+   duracion:'5 años'},
+
+  // TURISMO
+  {id:'c30',area:'tur',name:'Gastronomía',type:'Universitaria',salary:'S/ 2,000–6,000',demand:'high',
+   desc:'Perú tiene una de las gastronomías más reconocidas del mundo. Esta carrera forma chefs creativos con dominio técnico en cocina peruana, internacional, pastelería y gestión de restaurantes.',
+   donde:'Restaurantes, hoteles, catering, viajes culinarios, televisión, emprendimiento propio.',
+   skills:['Técnicas culinarias','Gestión de cocina','Costos y presupuesto','Creatividad gastronómica','Pastelería'],
+   unis:['Le Cordon Bleu','USIL','ISIL','Cenfotur'],
+   duracion:'4–5 años'},
+  {id:'c31',area:'tur',name:'Turismo y Hotelería',type:'Universitaria',salary:'S/ 1,800–4,500',demand:'med',
+   videoId:'Kkv08S8a85U',
+   desc:'Gestiona servicios turísticos, hoteleros y de entretenimiento. Perú es uno de los destinos más visitados de Sudamérica, por lo que el sector ofrece grandes oportunidades.',
+   donde:'Hoteles, agencias de viajes, aerolíneas, Ministerio de Cultura y Turismo.',
+   skills:['Idiomas (inglés, francés)','Atención al cliente','Gestión hotelera','Marketing turístico','Logística'],
+   unis:['USIL','Cenfotur','ISIL','San Marcos'],
+   duracion:'5 años'},
+
+  // CIENCIAS
+  {id:'c32',area:'nat',name:'Biotecnología',type:'Universitaria',salary:'S/ 2,500–6,000',demand:'high',
+   desc:'Aplica la biología y la tecnología para desarrollar soluciones en salud, agricultura y medio ambiente. Trabaja con organismos vivos, genes y procesos biológicos para crear productos innovadores.',
+   donde:'Laboratorios farmacéuticos, centros de investigación, empresas agroindustriales.',
+   skills:['Biología molecular','Genética','Bioquímica','Investigación científica','Inglés técnico'],
+   unis:['UPCH','San Marcos','PUCP','UNI'],
+   duracion:'5 años'},
+  {id:'c33',area:'nat',name:'Ingeniería Ambiental',type:'Universitaria',salary:'S/ 2,500–5,500',demand:'high',
+   desc:'Diseña soluciones para proteger el medio ambiente y gestionar de forma sostenible los recursos naturales. Trabaja en empresas mineras, industria y gobierno para cumplir normas ambientales.',
+   donde:'Empresas mineras, gobierno, ONGs ambientales, consultoras, organismos internacionales.',
+   skills:['Gestión ambiental','SIG (GIS)','Normas ISO 14001','Monitoreo ambiental','Inglés'],
+   unis:['UNI','San Marcos','PUCP','UNSA'],
+   duracion:'5 años'},
+  {id:'c34',area:'nat',name:'Biología',type:'Universitaria',salary:'S/ 2,000–4,500',demand:'med',
+   desc:'Estudia los seres vivos, sus procesos y relaciones con el entorno. Trabaja en investigación, docencia, conservación de ecosistemas y empresas farmacéuticas.',
+   donde:'Universidades, centros de investigación, gobierno, ONGs, empresas farmacéuticas.',
+   skills:['Biología celular','Ecología','Investigación científica','Laboratorio','Estadística'],
+   unis:['San Marcos','PUCP','UNALM','UNSM'],
+   duracion:'5 años'},
+];
+
+// ═══════════════════════════
+// QUESTIONS
+// ═══════════════════════════
+const SCALE=[
+  {e:'😍',l:'Me encanta',p:5},
+  {e:'😊',l:'Me gusta',p:4},
+  {e:'😐',l:'Neutral',p:3},
+  {e:'😕',l:'Poco',p:2},
+  {e:'😶',l:'No me gusta',p:1},
+];
+const QS=[
+  {a:'tec',t:'Me gusta resolver problemas difíciles y lógicos.'},
+  {a:'tec',t:'Disfruto usar computadoras y nuevas tecnologías.'},
+  {a:'tec',t:'Me gustaría crear aplicaciones o videojuegos.'},
+  {a:'tec',t:'Me gusta analizar datos y encontrar patrones.'},
+  {a:'tec',t:'Me interesa la robótica o la inteligencia artificial.'},
+  {a:'sal',t:'Me gusta ayudar a personas que tienen problemas.'},
+  {a:'sal',t:'Me interesa aprender sobre el cuerpo humano.'},
+  {a:'sal',t:'Me gustaría trabajar en hospitales o clínicas.'},
+  {a:'sal',t:'Tengo paciencia para escuchar a otras personas.'},
+  {a:'neg',t:'Me gusta organizar actividades o proyectos.'},
+  {a:'neg',t:'Disfruto liderar grupos y tomar decisiones.'},
+  {a:'neg',t:'Me gustaría tener mi propio negocio.'},
+  {a:'neg',t:'Me interesa administrar dinero y recursos.'},
+  {a:'art',t:'Me gusta dibujar, diseñar o crear contenido visual.'},
+  {a:'art',t:'Disfruto expresar mis ideas de forma creativa.'},
+  {a:'art',t:'Me interesa la fotografía o la producción de videos.'},
+  {a:'art',t:'Me interesa la publicidad o el diseño gráfico.'},
+  {a:'edu',t:'Me gusta enseñar o explicar cosas a otras personas.'},
+  {a:'edu',t:'Disfruto trabajar con niños o adolescentes.'},
+  {a:'edu',t:'Me interesa comprender el comportamiento humano.'},
+  {a:'der',t:'Me interesa defender lo que considero justo.'},
+  {a:'der',t:'Me gusta debatir y argumentar ideas.'},
+  {a:'der',t:'Me interesa conocer las leyes y la justicia.'},
+  {a:'tur',t:'Me gusta conocer nuevas culturas y países.'},
+  {a:'tur',t:'Me interesa la cocina y la preparación de alimentos.'},
+  {a:'tur',t:'Me gusta viajar y explorar lugares nuevos.'},
+  {a:'nat',t:'Me interesa proteger el medio ambiente.'},
+  {a:'nat',t:'Disfruto las actividades de investigación científica.'},
+  {a:'_p',t:'¿Cómo prefieres trabajar?',
+   c:['Solo/a – trabajo mejor de forma independiente','En equipo – disfruto colaborar','Ambas por igual'],
+   m:{0:null,1:'neg',2:null}},
+  {a:'_p',t:'Cuando tienes un problema, ¿qué haces?',
+   c:['Lo analizo cuidadosamente','Busco una solución creativa','Pido ayuda o consejo a otros'],
+   m:{0:'tec',1:'art',2:'sal'}},
+];
+
+// ═══════════════════════════
+// APP STATE
+// ═══════════════════════════
+let curQ=0, answers={}, scores={tec:0,sal:0,neg:0,art:0,edu:0,der:0,tur:0,nat:0};
+let activeFilter='all';
+
+// ═══════════════════════════
+// NAVIGATION
+// ═══════════════════════════
+function goTo(sc){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+sc).classList.add('active');
+  window.scrollTo(0,0);
+  if(sc==='test'){curQ=0;answers={};scores={tec:0,sal:0,neg:0,art:0,edu:0,der:0,tur:0,nat:0};renderQ();}
+  if(sc==='careers')renderCareers();
+}
+function filterAndGoTo(area){activeFilter=area;goTo('careers');}
+
+// ═══════════════════════════
+// TEST
+// ═══════════════════════════
+function renderQ(){
+  const q=QS[curQ], total=QS.length;
+  const pct=Math.round((curQ/total)*100);
+  document.getElementById('pFill').style.width=pct+'%';
+  document.getElementById('pLabel').textContent=`Pregunta ${curQ+1} de ${total}`;
+  document.getElementById('pPct').textContent=pct+'%';
+
+  const area=AREAS.find(a=>a.id===q.a)||{name:'Personalidad',emoji:'⭐'};
+  const tag=q.a.startsWith('_')?'⭐ Personalidad':`${area.emoji} ${area.name}`;
+
+  let html=`<div class="q-tag">${tag}</div>`;
+  html+=`<div class="q-text">${q.t}</div>`;
+
+  if(q.c){
+    html+=`<div class="mc-list">`;
+    q.c.forEach((opt,i)=>{
+      const on=answers[curQ]===i?'on':'';
+      const ltr=String.fromCharCode(65+i);
+      html+=`<button class="mc-btn ${on}" onclick="pickMC(${i})"><span class="mc-ltr">${ltr}</span>${opt}</button>`;
+    });
+    html+=`</div>`;
+  } else {
+    html+=`<div class="scale-row">`;
+    SCALE.forEach(s=>{
+      const on=answers[curQ]===s.p?'on':'';
+      html+=`<button class="sc-btn ${on}" onclick="pickScale(${s.p})">
+        <span class="emo">${s.e}</span>
+        <span class="sc-pt">${s.p}</span>
+        <span class="sc-lbl">${s.l}</span>
+      </button>`;
+    });
+    html+=`</div>`;
+  }
+
+  document.getElementById('qArea').innerHTML=html;
+  const btn=document.getElementById('btnNext');
+  btn.classList.toggle('on', answers[curQ]!==undefined);
+}
+function pickScale(p){
+  answers[curQ]=p;
+  document.getElementById('btnNext').classList.add('on');
+  document.querySelectorAll('.sc-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.sc-btn .sc-pt').forEach(b=>{
+    if(parseInt(b.textContent)===p) b.closest('.sc-btn').classList.add('on');
+  });
+}
+function pickMC(i){
+  answers[curQ]=i;
+  document.getElementById('btnNext').classList.add('on');
+  document.querySelectorAll('.mc-btn').forEach((b,idx)=>b.classList.toggle('on',idx===i));
+}
+function nextQ(){
+  const q=QS[curQ], ans=answers[curQ];
+  if(ans===undefined) return;
+  if(!q.c){
+    if(scores[q.a]!==undefined) scores[q.a]+=ans;
+  } else {
+    const t=q.m[ans];
+    if(t && scores[t]!==undefined) scores[t]+=4;
+  }
+  curQ++;
+  if(curQ>=QS.length) showResults();
+  else renderQ();
+}
+
+// ═══════════════════════════
+// RESULTS
+// ═══════════════════════════
+const maxes={tec:29,sal:24,neg:24,art:24,edu:15,der:15,tur:15,nat:10};
+const areaColors={tec:'#00897b',sal:'#e53935',neg:'#f57c00',art:'#8e24aa',edu:'#1976d2',der:'#455a64',tur:'#f4511e',nat:'#388e3c'};
+const profiles={
+  tec:'Eres analítico/a, lógico/a y te apasiona la tecnología. Tienes mente de ingeniero: siempre buscas la solución más eficiente. Tu curiosidad por cómo funcionan las cosas te llevará lejos en el mundo digital.',
+  sal:'Tienes una gran vocación de servicio y empatía. Tu bienestar personal está conectado con el de los demás. Eres paciente, empático/a y te da satisfacción ayudar a que otros estén bien.',
+  neg:'Eres un/a líder natural con visión estratégica. Te motiva emprender, organizar y crear impacto. Tienes habilidades para negociar, planificar y convertir ideas en negocios exitosos.',
+  art:'Tu mente es creativa y expresiva. Ves el mundo de manera diferente y disfrutas transformar ideas en obras visuales, auditivas o narrativas. La originalidad es tu mayor fortaleza.',
+  edu:'Eres empático/a, comunicativo/a y apasionado/a por compartir conocimiento. Sientes satisfacción cuando guías o inspiras a otros. Tienes vocación de transformar vidas a través de la educación.',
+  der:'Tienes pensamiento crítico y sentido de la justicia. Te gusta debatir, argumentar y buscar la verdad. Defiendes tus valores con firmeza y te interesa el orden y la equidad social.',
+  tur:'Eres sociable, curioso/a y adaptable. Disfrutas conocer nuevas culturas y crear experiencias memorables. Tu pasión por la cocina, los viajes o la hospitalidad es tu punto de partida.',
+  nat:'Tienes espíritu científico e investigador. La naturaleza y los sistemas biológicos te fascinan. Tu curiosidad te impulsa a entender el mundo y contribuir a su cuidado y sostenibilidad.',
+};
+
+function showResults(){
+  const sorted=AREAS.map(a=>({...a, score:Math.min(100,Math.round(((scores[a.id]||0)/(maxes[a.id]||40))*100))})).sort((a,b)=>b.score-a.score);
+
+  // Bars
+  document.getElementById('resBars').innerHTML=sorted.map(a=>`
+    <div class="r-row">
+      <div class="r-name">${a.emoji} ${a.name}</div>
+      <div class="r-track"><div class="r-fill" data-p="${a.score}" style="background:${areaColors[a.id]}"></div></div>
+      <div class="r-pct">${a.score}%</div>
+    </div>`).join('');
+
+  // Chips: careers matching top 2 areas
+  const top2=sorted.slice(0,2).map(a=>a.id);
+  const recs=CAREERS.filter(c=>top2.includes(c.area)).slice(0,10);
+  document.getElementById('resChips').innerHTML=recs.map(c=>`<span class="chip">${c.name}</span>`).join('');
+
+  // Profile
+  document.getElementById('resProfile').textContent=profiles[sorted[0].id]||'Tienes un perfil diverso con intereses en múltiples áreas.';
+
+  goTo('results');
+  setTimeout(()=>{
+    document.querySelectorAll('.r-fill').forEach(b=>b.style.width=b.dataset.p+'%');
+  },150);
+}
+
+// ═══════════════════════════
+// CAREERS
+// ═══════════════════════════
+function renderCareers(){
+  const amap={};
+  AREAS.forEach(a=>amap[a.id]=a);
+
+  // Filters
+  const fr=document.getElementById('filterRow');
+  fr.innerHTML=`<button class="f-btn ${activeFilter==='all'?'on':''}" onclick="setFilter('all')">Todas</button>`;
+  AREAS.forEach(a=>{
+    fr.innerHTML+=`<button class="f-btn ${activeFilter===a.id?'on':''}" onclick="setFilter('${a.id}')">${a.emoji} ${a.name}</button>`;
+  });
+
+  // Cards
+  let list=activeFilter==='all'?CAREERS:CAREERS.filter(c=>c.area===activeFilter);
+  const q=(document.getElementById('careerSearch')?.value||'').trim().toLowerCase();
+  if(q){
+    list=list.filter(c=>
+      c.name.toLowerCase().includes(q) ||
+      c.desc.toLowerCase().includes(q) ||
+      c.skills.some(s=>s.toLowerCase().includes(q)) ||
+      c.unis.some(u=>u.toLowerCase().includes(q)) ||
+      amap[c.area].name.toLowerCase().includes(q)
+    );
+  }
+  if(list.length===0){
+    document.getElementById('careersGrid').innerHTML=`<div class="no-results">😕 No encontramos carreras con "${q}". Intenta con otra palabra.</div>`;
+    return;
+  }
+  document.getElementById('careersGrid').innerHTML=list.map(c=>{
+    const a=amap[c.area];
+    const dem=c.demand==='high'
+      ?`<span class="c-demand dem-h">🔥 Alta demanda</span>`
+      :`<span class="c-demand dem-m">📈 Buena demanda</span>`;
+    return `<div class="c-card" onclick="openModal('${c.id}')">
+      <div class="c-head">
+        <span class="c-tag" style="background:${a.bg};color:${a.color}">${a.emoji} ${a.name}</span>
+        ${dem}
+        <div class="c-name">${c.name}</div>
+        <div class="c-type">${c.type} · ${c.duracion}</div>
+      </div>
+      <div class="c-body">
+        <div class="c-desc">${c.desc.substring(0,120)}…</div>
+        <div class="c-meta-row">
+          <span class="c-salary">💰 ${c.salary}</span>
+          <span style="font-size:.75rem;color:#aaa">Ver más →</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function setFilter(f){activeFilter=f;renderCareers();}
+
+// ═══════════════════════════
+// MODAL CAREER DETAIL
+// ═══════════════════════════
+function openModal(id){
+  const c=CAREERS.find(x=>x.id===id);
+  if(!c) return;
+  const a=AREAS.find(x=>x.id===c.area);
+  const readText=`${c.name}. ${c.desc} Dónde trabaja: ${c.donde}. Habilidades necesarias: ${c.skills.join(', ')}. Dónde estudiar en Perú: ${c.unis.join(', ')}.`;
+  const videoEmbed = c.videoId
+    ? `<iframe src="https://www.youtube.com/embed/${c.videoId}" title="Video sobre ${c.name}" allowfullscreen></iframe>`
+    : `<div class="m-video-placeholder"><span class="vp-ico">📹</span><span>Espacio para video de YouTube sobre ${c.name}.<br>(Agrega el ID del video en el campo "videoId" de esta carrera)</span></div>`;
+  document.getElementById('modalContent').innerHTML=`
+    <span class="c-tag" style="background:${a.bg};color:${a.color};border-radius:4px;font-size:.75rem;font-weight:700;padding:3px 10px;">${a.emoji} ${a.name}</span>
+    <h2 style="margin-top:10px;">${c.name}</h2>
+    <span class="m-tag">${c.type} · Duración: ${c.duracion}</span>
+    <div class="m-salary">💰 ${c.salary} / mes</div>
+    <button class="m-read-btn" id="readBtn" onclick="toggleRead()">🔊 Escuchar descripción</button>
+    <p>${c.desc}</p>
+    <div class="m-video-box">
+      <h4>🎬 Video explicativo</h4>
+      <div class="m-video-frame">${videoEmbed}</div>
+    </div>
+    <hr>
+    <h4>🏢 ¿Dónde trabaja?</h4>
+    <p>${c.donde}</p>
+    <hr>
+    <h4>💡 Habilidades necesarias</h4>
+    <ul>${c.skills.map(s=>`<li>${s}</li>`).join('')}</ul>
+    <hr>
+    <h4>🎓 Dónde estudiar en Perú</h4>
+    <ul>${c.unis.map(u=>`<li>${u}</li>`).join('')}</ul>
+  `;
+  document.getElementById('careerModal').dataset.readtext=readText;
+  document.getElementById('careerModal').classList.add('on');
+}
+function closeModalBtn(){
+  document.getElementById('careerModal').classList.remove('on');
+  speechSynthesis.cancel();
+  const btn=document.getElementById('readBtn');
+  if(btn){btn.classList.remove('reading');btn.textContent='🔊 Escuchar descripción';}
+}
+function closeModal(e){if(e.target===document.getElementById('careerModal')) closeModalBtn();}
+
+function toggleRead(){
+  const btn=document.getElementById('readBtn');
+  if(speechSynthesis.speaking){
+    speechSynthesis.cancel();
+    btn.classList.remove('reading');
+    btn.textContent='🔊 Escuchar descripción';
+    return;
+  }
+  const text=document.getElementById('careerModal').dataset.readtext||'';
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.lang='es-ES';
+  utt.onend=()=>{btn.classList.remove('reading');btn.textContent='🔊 Escuchar descripción';};
+  speechSynthesis.speak(utt);
+  btn.classList.add('reading');
+  btn.textContent='⏹ Detener lectura';
+}
+
+// ═══════════════════════════
+// RUTAS
+// ═══════════════════════════
+function switchRuta(i){
+  document.querySelectorAll('.r-tab').forEach((t,idx)=>t.classList.toggle('on',idx===i));
+  document.querySelectorAll('.ruta-content').forEach((c,idx)=>c.classList.toggle('on',idx===i));
+}
+
+// ═══════════════════════════
+// CHAT IA
+// ═══════════════════════════
+function toggleChat(){document.getElementById('chatPanel').classList.toggle('on');}
+
+let chatHistory=[];
+
+const SYSTEM_PROMPT=`Eres "Orienta", un asistente vocacional inteligente y amigable de la plataforma Futuro360, diseñada para estudiantes peruanos de secundaria. Tu misión es ayudarlos a descubrir su vocación y orientarlos en su futuro profesional.
+
+Responde siempre en español, con un tono cálido, motivador y cercano (como un orientador amigo). Puedes hablar con libertad sobre:
+- Carreras universitarias y técnicas en Perú
+- Salarios aproximados en el mercado peruano (en soles)
+- Universidades e institutos reconocidos en Perú (PUCP, UTEC, San Marcos, UPC, USIL, UNI, UP, UCSM, UNMSM, Le Cordon Bleu, SENATI, TECSUP, etc.)
+- Becas disponibles: Beca 18, Beca Bicentenario (PRONABEC), CONCYTEC, becas internacionales
+- Áreas vocacionales: Tecnología, Salud, Negocios, Arte y Diseño, Educación, Derecho, Turismo y Gastronomía, Ciencias Naturales
+- Habilidades necesarias para cada carrera
+- Consejos para elegir carrera, manejo del estrés vocacional, proceso de admisión
+- Diferencias entre universidad, instituto y CETPRO
+- Cualquier duda o consulta personal del estudiante sobre su futuro
+
+Si el estudiante parece perdido o indeciso, anímalo a hacer el test vocacional de 30 preguntas de la plataforma. Sé empático y nunca juzgues. Limita tus respuestas a 3-4 oraciones máximo para ser conciso y fácil de leer en el chat.`;
+
+async function sendChat(){
+  const inp=document.getElementById('chatIn');
+  const msg=inp.value.trim();
+  if(!msg) return;
+  addMsg(msg,'usr');
+  inp.value='';
+  inp.disabled=true;
+
+  // Typing indicator
+  const typingId='typing-'+Date.now();
+  const m=document.getElementById('chatMsgs');
+  const td=document.createElement('div');
+  td.className='msg bot'; td.id=typingId; td.textContent='✦ Escribiendo...';
+  m.appendChild(td); m.scrollTop=m.scrollHeight;
+
+  chatHistory.push({role:'user',content:msg});
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:400,
+        system:SYSTEM_PROMPT,
+        messages:chatHistory
+      })
+    });
+    const data=await res.json();
+    const reply=data.content?.[0]?.text||'Lo siento, no pude responder en este momento. Intenta de nuevo. 😊';
+    chatHistory.push({role:'assistant',content:reply});
+    document.getElementById(typingId)?.remove();
+    addMsg(reply,'bot');
+  }catch(e){
+    document.getElementById(typingId)?.remove();
+    addMsg('Ups, hubo un problema de conexión. ¿Puedes intentar de nuevo? 😊','bot');
+  }
+  inp.disabled=false;
+  inp.focus();
+}
+
+function addMsg(t,role){
+  const m=document.getElementById('chatMsgs');
+  const d=document.createElement('div');
+  d.className=`msg ${role}`; d.textContent=t;
+  m.appendChild(d); m.scrollTop=m.scrollHeight;
+}
+
+// ═══════════════════════════
+// A11Y
+// ═══════════════════════════
+let fz=16, dark=false, hc=false;
+function fs(d){fz=Math.max(12,Math.min(22,fz+d*2));document.body.style.fontSize=fz+'px';}
+function readPage(){
+  if(speechSynthesis.speaking){speechSynthesis.cancel();return;}
+  const active=document.querySelector('.screen.active');
+  const text=(active?active.innerText:document.body.innerText).replace(/\s+/g,' ').trim();
+  const utt=new SpeechSynthesisUtterance(text.substring(0,4000));
+  utt.lang='es-ES';
+  speechSynthesis.speak(utt);
+}
+function toggleTheme(){
+  dark=!dark;
+  if(dark){
+    document.documentElement.style.setProperty('--paper','#0f0e17');
+    document.documentElement.style.setProperty('--ink','#fffcf5');
+    document.documentElement.style.setProperty('--cream','#1a1a2a');
+    document.documentElement.style.setProperty('--sand','#2a2a3a');
+  } else {
+    document.documentElement.style.removeProperty('--paper');
+    document.documentElement.style.removeProperty('--ink');
+    document.documentElement.style.removeProperty('--cream');
+    document.documentElement.style.removeProperty('--sand');
+  }
+}
+function hiContrast(){
+  hc=!hc;
+  document.documentElement.style.setProperty('--teal', hc?'#00e5cc':'#00897b');
+}
+</script>
+</body>
+</html>
